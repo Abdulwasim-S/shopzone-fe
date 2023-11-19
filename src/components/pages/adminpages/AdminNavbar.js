@@ -1,4 +1,4 @@
-import { Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading } from "@chakra-ui/react";
 import React from "react";
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -18,24 +18,49 @@ const AdminNavbar = () => {
           Admin
         </Heading>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto text-center">
             <NavDropdown title="Products" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/admin">Products List</NavDropdown.Item>
+              <Button
+                width={"100%"}
+                variant={"ghost"}
+                onClick={() => navTo("/admin")}
+              >
+                Products List
+              </Button>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/admin/add-product">
+              <Button
+                width={"100%"}
+                variant={"ghost"}
+                onClick={() => navTo("/admin/add-product")}
+              >
                 Add products
-              </NavDropdown.Item>
+              </Button>
             </NavDropdown>
 
-            <Nav.Link href="/admin/order-status">Order Status</Nav.Link>
-            <Nav.Link href="/admin/cancel-requests" disabled>
+            <Button
+              variant={"ghost"}
+              onClick={() => navTo("/admin/order-status")}
+            >
+              Order Status
+            </Button>
+            <Button
+              variant={"ghost"}
+              color={"gray.400"}
+              onClick={() => {
+                // navTo("/admin/cancel-requests");
+              }}
+              disabled
+            >
               Cancel Requests
-            </Nav.Link>
+            </Button>
           </Nav>
+          <Box textAlign={"center"}>
+            <Button my={3} variant={"ghost"} onClick={logout}>
+              LogOut
+            </Button>
+          </Box>
         </Navbar.Collapse>
-        <Button variant={"outline"} borderWidth={3} onClick={logout}>
-          LogOut
-        </Button>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
       </Container>
     </Navbar>

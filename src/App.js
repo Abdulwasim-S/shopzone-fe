@@ -19,6 +19,7 @@ import CartPage from "./components/pages/userspages/CartPage";
 import BuyProductPage from "./components/pages/userspages/BuyProductPage";
 import FooterPage from "./components/pages/homepage/FooterPage";
 import MyOrdersPage from "./components/pages/userspages/MyOrdersPage";
+import UpdateOrderStatus from "./components/pages/CRUD/UpdateOrderStatus";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
         <Route path="/admin" element={<Admin />}>
           <Route path="" element={<AdminProducts />} />
           <Route path="order-status" element={<Orders />} />
+          <Route path="update-status" element={<UpdateOrderStatus />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path=":id" element={<EditProduct />} />
         </Route>

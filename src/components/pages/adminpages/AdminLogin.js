@@ -15,14 +15,17 @@ import {
 import axios from "axios";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { setAdminOrders } from "../../../helpers/Redux/Reducer/products.reducer";
 
 const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [credential, setCredential] = useState(false);
   const navTo = useNavigate();
+  const dispatch = useDispatch();
 
   const fieldValidationSchema = yup.object({
     email: yup.string().required(),
@@ -42,12 +45,29 @@ const AdminLogin = () => {
           .post("https://shopzone-backend.vercel.app/admin/login", {
             ...loginInfo,
           })
-          .then((res) => {
+          .then(async (res) => {
             if (res.status === 200) {
               localStorage["shopzone-admin-token"] = res.data.token;
               localStorage["shopzone-admin-email"] = loginInfo.email;
               localStorage["shopzone-admin-password"] = loginInfo.password;
-              navTo("/admin");
+              await axios
+                .get(
+                  "https://shopzone-backend.vercel.app/user/orders",
+                  {},
+                  {
+                    headers: {
+                      "x-auth-roken": localStorage["shopzone-admin-token"],
+                      email: localStorage["shopzone-admin-email"],
+                    },
+                  }
+                )
+                .then((res) => {
+                  dispatch(setAdminOrders(res.data.items));
+                  navTo("/admin");
+                })
+                .catch((error) => {
+                  console.log("error", error);
+                });
             }
           })
           .catch((error) => {

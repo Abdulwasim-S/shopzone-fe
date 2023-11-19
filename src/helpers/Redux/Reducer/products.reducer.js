@@ -60,6 +60,15 @@ const productSlice = createSlice({
     setToOrders: (state, action) => {
       state.myOrders = action.payload;
     },
+    setAdminOrders: (state, action) => {
+      state.adminOrders = action.payload;
+    },
+    updateAdminOrder: (state, action) => {
+      const orderList = state.adminOrders.filter(
+        (ele) => ele._id !== action.payload._id
+      );
+      state.adminOrders = [action.payload, ...orderList];
+    },
   },
 });
 export const {
@@ -75,5 +84,7 @@ export const {
   addToOrders,
   setCartItem,
   setToOrders,
+  setAdminOrders,
+  updateAdminOrder,
 } = productSlice.actions;
 export default productSlice.reducer;

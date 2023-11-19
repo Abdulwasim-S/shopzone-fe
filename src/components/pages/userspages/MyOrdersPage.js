@@ -13,7 +13,7 @@ const MyOrdersPage = () => {
       <div className="row justify-content-around">
         {myOrders.length > 0
           ? myOrders.map((ele, idx) => (
-              <Box maxW={"18rem"} mb={5} key={idx}>
+              <Box maxW={"18rem"} mb={5} key={idx} id={ele._id}>
                 <Card className="h-100">
                   <Box
                     maxH={"30vh"}
@@ -33,6 +33,9 @@ const MyOrdersPage = () => {
                     <Card.Title>{ele.product_name}</Card.Title>
                     <Card.Text>
                       Price : <i>₹ {ele.price}</i>
+                    </Card.Text>
+                    <Card.Text>
+                      Quantity : <i>{ele.quantity}</i>
                     </Card.Text>
                     <Card.Text>
                       Mobile : <i> {ele.mobile}</i>
