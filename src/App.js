@@ -18,6 +18,7 @@ import UserSignup from "./components/pages/userspages/UserSignup";
 import CartPage from "./components/pages/userspages/CartPage";
 import BuyProductPage from "./components/pages/userspages/BuyProductPage";
 import FooterPage from "./components/pages/homepage/FooterPage";
+import MyOrdersPage from "./components/pages/userspages/MyOrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
           <Route path="login" element={<UserLogin />} />
           <Route path="signup" element={<UserSignup />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="myorders" element={<MyOrdersPage />} />
           <Route path="buyproduct" element={<BuyProductPage />} />
         </Route>
         <Route path="/admin-login" element={<AdminLogin />} />

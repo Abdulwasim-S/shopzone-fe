@@ -47,7 +47,7 @@ const NavBar = () => {
               <Button
                 variant={"ghost"}
                 onClick={() => {
-                  // navTo("/myorders");
+                  navTo("/myorders");
                 }}
               >
                 My orders
