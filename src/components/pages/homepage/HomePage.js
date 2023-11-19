@@ -16,7 +16,7 @@ const HomePage = () => {
           alignItems={"center"}
         >
           {" "}
-          <i>Habibi come to welcome to ShopZone</i>
+          <i>Habibi welcome to ShopZone</i>
         </Flex>
         <Outlet />
       </Box>

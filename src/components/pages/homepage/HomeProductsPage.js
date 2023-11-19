@@ -1,4 +1,13 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightAddon,
+  InputRightElement,
+} from "@chakra-ui/react";
 import React from "react";
 import { Card } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -6,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../../helpers/Redux/Reducer/products.reducer";
 import axios from "axios";
+import { Search2Icon } from "@chakra-ui/icons";
 
 const HomeProductsPage = () => {
   const { products, isLoggedIn } = useSelector((state) => state.productReducer);
@@ -44,6 +54,24 @@ const HomeProductsPage = () => {
 
   return (
     <Box minH={"100vh"} p={6} boxShadow={"md"} textAlign={"center"}>
+      <InputGroup maxW={"80%"} my={5} bg={"white"} borderRadius={5} size="sm">
+        <InputLeftElement
+          pointerEvents="none"
+          children={<Search2Icon color="gray.600" />}
+        />
+        <Input type="text" placeholder="Search..." border="1px solid #949494" />
+        <InputRightAddon p={0} border="none">
+          <Button
+            size="sm"
+            borderLeftRadius={0}
+            borderRightRadius={3.3}
+            border="1px solid #949494"
+          >
+            Search
+          </Button>
+        </InputRightAddon>
+      </InputGroup>
+
       <div className="row justify-content-around">
         {products.length > 0 ? (
           products.map((ele, idx) => (
