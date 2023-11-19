@@ -21,7 +21,7 @@ const NavBar = () => {
         <Navbar.Brand href="/">Shop Zone</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto text-center">
             <Button
               variant={"ghost"}
               onClick={() => {
@@ -47,20 +47,24 @@ const NavBar = () => {
               <Button
                 variant={"ghost"}
                 onClick={() => {
-                  navTo("/myorders");
+                  // navTo("/myorders");
                 }}
               >
                 My orders
               </Button>
             </NavDropdown>
             {!isLoggedIn ? (
-              <Nav.Link href="/login">Login</Nav.Link>
+              <Button variant={"ghost"} onClick={() => navTo("/login")}>
+                Login
+              </Button>
             ) : (
               <Button variant={"outline"} onClick={logOut}>
                 LogOut
               </Button>
             )}
-            <Nav.Link href="/admin-login">Admin</Nav.Link>
+            <Button variant={"ghost"} onClick={() => navTo("/admin-login")}>
+              Admin
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

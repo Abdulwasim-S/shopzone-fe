@@ -59,7 +59,7 @@ const HomeProductsPage = () => {
           mb={5}
           bg={"white"}
           variant={"ghost"}
-          placeholder="Search..."
+          placeholder="Type here to search..."
           type="text"
           onChange={(e) => searchFilter(e.target.value)}
         />

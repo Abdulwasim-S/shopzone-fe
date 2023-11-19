@@ -1,5 +1,5 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Input } from "@chakra-ui/react";
 import axios from "axios";
 import React from "react";
 import { Card } from "react-bootstrap";
@@ -36,12 +36,44 @@ const AdminProducts = () => {
     localStorage["shopzone-edit-item"] = JSON.stringify(item[0]);
     navTo(id);
   };
+  const searchFilter = (filterKey) => {
+    var boxes = document.getElementsByClassName("product-card");
+    for (var i = 0; i < boxes.length; i++) {
+      var box = boxes[i];
+      if (box.id.includes(filterKey)) {
+        box.style.display = "block";
+      } else {
+        box.style.display = "none";
+      }
+    }
+  };
   return (
     <Box minH={"100vh"} p={6} boxShadow={"md"} textAlign={"center"}>
+      <Flex>
+        <Input
+          mb={5}
+          bg={"white"}
+          variant={"ghost"}
+          placeholder="Type here to search..."
+          type="text"
+          onChange={(e) => searchFilter(e.target.value)}
+        />
+      </Flex>
       <div className="row justify-content-around">
         {products.length > 0 ? (
           products.map((ele, idx) => (
-            <Box maxW={"18rem"} mb={5} key={idx}>
+            <Box
+              className="product-card"
+              id={
+                ele.product_name.toLowerCase() +
+                ele.description.toLowerCase() +
+                " " +
+                ele._id.toLowerCase()
+              }
+              maxW={"18rem"}
+              mb={5}
+              key={idx}
+            >
               <Card className="h-100">
                 <Box
                   maxH={"30vh"}
