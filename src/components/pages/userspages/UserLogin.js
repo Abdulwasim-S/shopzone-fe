@@ -21,6 +21,7 @@ import * as yup from "yup";
 import {
   setCartItem,
   setLoggedIn,
+  setToOrders,
   setUserName,
 } from "../../../helpers/Redux/Reducer/products.reducer";
 
@@ -68,10 +69,25 @@ const UserLogin = () => {
                     },
                   }
                 )
-                .then((res) => {
-                  console.log(res.data.items);
+                .then(async (res) => {
                   dispatch(setCartItem(res.data.items));
-                  navTo("/");
+                  await axios
+                    .post(
+                      "https://shopzone-backend.vercel.app/user/myorders",
+                      {},
+                      {
+                        headers: {
+                          email: localStorage["shopzone-user-email"],
+                        },
+                      }
+                    )
+                    .then((res) => {
+                      dispatch(setToOrders(res.data.items));
+                      navTo("/");
+                    })
+                    .catch((error) => {
+                      console.log("Error...", error);
+                    });
                 });
             }
           })

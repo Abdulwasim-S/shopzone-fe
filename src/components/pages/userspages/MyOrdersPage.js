@@ -32,24 +32,16 @@ const MyOrdersPage = () => {
                   <Card.Body>
                     <Card.Title>{ele.product_name}</Card.Title>
                     <Card.Text>
-                      Description : <i>{ele.description}</i>
-                    </Card.Text>
-                    <Card.Text>
                       Price : <i>₹ {ele.price}</i>
                     </Card.Text>
-                    <Box>
-                      Status :{" "}
-                      <Box color={ele.status ? "green.300" : "red.300"}>
-                        <i> {ele.status ? "Available" : "Out of stock"}</i>
-                      </Box>
-                    </Box>
                     <Card.Text>
-                      <small>
-                        Offer :{" "}
-                        <s>
-                          <i>₹ {+ele.price + +ele.price / 10}</i>
-                        </s>
-                      </small>
+                      Mobile : <i> {ele.mobile}</i>
+                    </Card.Text>
+                    <Card.Text>
+                      Delivery Address : <i> {ele.address}</i>
+                    </Card.Text>
+                    <Card.Text>
+                      Order status : <i> {ele.order_status}</i>
                     </Card.Text>
                   </Card.Body>
                 </Card>

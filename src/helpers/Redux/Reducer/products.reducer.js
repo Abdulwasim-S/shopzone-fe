@@ -50,12 +50,15 @@ const productSlice = createSlice({
       const data = state.cart.filter((ele) => ele._id !== action.payload);
       state.cart = data;
     },
+    setCartItem: (state, action) => {
+      state.cart = action.payload;
+    },
     //For User Order
     addToOrders: (state, action) => {
       state.cart.push(action.payload);
     },
-    setCartItem: (state, action) => {
-      state.cart = action.payload;
+    setToOrders: (state, action) => {
+      state.myOrders = action.payload;
     },
   },
 });
@@ -71,5 +74,6 @@ export const {
   deleteFromCart,
   addToOrders,
   setCartItem,
+  setToOrders,
 } = productSlice.actions;
 export default productSlice.reducer;
