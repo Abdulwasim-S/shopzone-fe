@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightAddon,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Input } from "@chakra-ui/react";
 import React from "react";
 import { Card } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -15,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../../helpers/Redux/Reducer/products.reducer";
 import axios from "axios";
-import { Search2Icon } from "@chakra-ui/icons";
 
 const HomeProductsPage = () => {
   const { products, isLoggedIn } = useSelector((state) => state.productReducer);
@@ -54,23 +44,15 @@ const HomeProductsPage = () => {
 
   return (
     <Box minH={"100vh"} p={6} boxShadow={"md"} textAlign={"center"}>
-      <InputGroup maxW={"80%"} my={5} bg={"white"} borderRadius={5} size="sm">
-        <InputLeftElement
-          pointerEvents="none"
-          children={<Search2Icon color="gray.600" />}
+      <Flex>
+        <Input
+          mb={5}
+          bg={"white"}
+          variant={"ghost"}
+          placeholder="Search..."
+          type="text"
         />
-        <Input type="text" placeholder="Search..." border="1px solid #949494" />
-        <InputRightAddon p={0} border="none">
-          <Button
-            size="sm"
-            borderLeftRadius={0}
-            borderRightRadius={3.3}
-            border="1px solid #949494"
-          >
-            Search
-          </Button>
-        </InputRightAddon>
-      </InputGroup>
+      </Flex>
 
       <div className="row justify-content-around">
         {products.length > 0 ? (
@@ -99,20 +81,19 @@ const HomeProductsPage = () => {
                   <Card.Text>
                     Price : <i>₹ {ele.price}</i>
                   </Card.Text>
+                  <small>
+                    Offer :{" "}
+                    <s>
+                      <i>₹ {+ele.price + +ele.price / 10}</i>
+                    </s>
+                  </small>
                   <Box>
                     Status :{" "}
                     <Box color={ele.status ? "green.300" : "red.300"}>
                       <i> {ele.status ? "Available" : "Out of stock"}</i>
                     </Box>
                   </Box>
-                  <Card.Text>
-                    <small>
-                      Offer :{" "}
-                      <s>
-                        <i>₹ {+ele.price + +ele.price / 10}</i>
-                      </s>
-                    </small>
-                  </Card.Text>
+                  <Card.Text></Card.Text>
                   {ele.status ? (
                     <Button
                       variant="ghost"
