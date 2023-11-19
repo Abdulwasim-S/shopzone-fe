@@ -41,7 +41,17 @@ const HomeProductsPage = () => {
       navTo("buyproduct");
     }
   };
-
+  const searchFilter = (filterKey) => {
+    var boxes = document.getElementsByClassName("product-card");
+    for (var i = 0; i < boxes.length; i++) {
+      var box = boxes[i];
+      if (box.id.includes(filterKey)) {
+        box.style.display = "block";
+      } else {
+        box.style.display = "none";
+      }
+    }
+  };
   return (
     <Box minH={"100vh"} p={6} boxShadow={"md"} textAlign={"center"}>
       <Flex>
@@ -51,13 +61,22 @@ const HomeProductsPage = () => {
           variant={"ghost"}
           placeholder="Search..."
           type="text"
+          onChange={(e) => searchFilter(e.target.value)}
         />
       </Flex>
 
       <div className="row justify-content-around">
         {products.length > 0 ? (
           products.map((ele, idx) => (
-            <Box maxW={"18rem"} mb={5} key={idx}>
+            <Box
+              className="product-card"
+              id={
+                ele.product_name.toLowerCase() + ele.description.toLowerCase()
+              }
+              maxW={"18rem"}
+              mb={5}
+              key={idx}
+            >
               <Card className="h-100">
                 <Box
                   maxH={"30vh"}

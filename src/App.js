@@ -17,6 +17,7 @@ import UserLogin from "./components/pages/userspages/UserLogin";
 import UserSignup from "./components/pages/userspages/UserSignup";
 import CartPage from "./components/pages/userspages/CartPage";
 import BuyProductPage from "./components/pages/userspages/BuyProductPage";
+import FooterPage from "./components/pages/homepage/FooterPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,22 +33,25 @@ function App() {
     getProducts();
   });
   return (
-    <Routes>
-      <Route exact path="/" element={<HomePage />}>
-        <Route path="" element={<HomeProductsPage />} />
-        <Route path="login" element={<UserLogin />} />
-        <Route path="signup" element={<UserSignup />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="buyproduct" element={<BuyProductPage />} />
-      </Route>
-      <Route path="/admin-login" element={<AdminLogin />} />
-      <Route path="/admin" element={<Admin />}>
-        <Route path="" element={<AdminProducts />} />
-        <Route path="order-status" element={<Orders />} />
-        <Route path="add-product" element={<AddProduct />} />
-        <Route path=":id" element={<EditProduct />} />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route exact path="/" element={<HomePage />}>
+          <Route path="" element={<HomeProductsPage />} />
+          <Route path="login" element={<UserLogin />} />
+          <Route path="signup" element={<UserSignup />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="buyproduct" element={<BuyProductPage />} />
+        </Route>
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<Admin />}>
+          <Route path="" element={<AdminProducts />} />
+          <Route path="order-status" element={<Orders />} />
+          <Route path="add-product" element={<AddProduct />} />
+          <Route path=":id" element={<EditProduct />} />
+        </Route>
+      </Routes>
+      <FooterPage />
+    </>
   );
 }
 
