@@ -14,10 +14,12 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Stack } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import useRazorpay from "react-razorpay";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 const BuyProductPage = () => {
+  const [Razorpay] = useRazorpay();
   const navTo = useNavigate();
   const [state, setState] = useState(1);
   const data = JSON.parse(localStorage["shopzone-buy-item"]);
@@ -46,19 +48,52 @@ const BuyProductPage = () => {
     validationSchema: fieldValidationSchema,
     onSubmit: async (productInfo) => {
       try {
-        await axios
-          .post("https://shopzone-backend.vercel.app/cart/buy", productInfo, {
-            headers: {
-              "x-auth-token-user": localStorage["shopzone-user-token"],
-              email: localStorage["shopzone-user-email"],
-            },
-          })
-          .then((res) => {
-            navTo("/");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        const options = {
+          key: "rzp_test_F66suPajOfS7iH",
+          key_secret: "JmcYo3OnGe6CH042zqKslWET",
+          amount: productInfo.price * 100,
+          currency: "INR",
+          name: "Order Product",
+          description: "Test Transaction",
+          handler: async (res) => {
+            try {
+              // productInfo.payment_id = res.razorpay_payment_id;
+              await axios
+                .post(
+                  "https://shopzone-backend.vercel.app/cart/buy",
+                  productInfo,
+                  {
+                    headers: {
+                      "x-auth-token-user": localStorage["shopzone-user-token"],
+                      email: localStorage["shopzone-user-email"],
+                    },
+                  }
+                )
+                .then((res) => {
+                  navTo("/");
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            } catch (error) {
+              console.log("Error....", error);
+            }
+          },
+          prefill: {
+            name: "",
+            email: "",
+            contact: "",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        const rzpay = new Razorpay(options);
+        rzpay.open();
       } catch (error) {
         console.log("Error....", error);
       }
