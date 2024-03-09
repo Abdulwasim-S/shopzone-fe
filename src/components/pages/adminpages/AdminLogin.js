@@ -83,7 +83,7 @@ const AdminLogin = () => {
     },
   });
   const fillDemo = () => {
-    values.email = "admin@shopzone.in";
+    values.email = "admin@lakshmibuilderssupply.in";
     values.password = "admin@123";
     handleSubmit();
   };
