@@ -104,7 +104,7 @@ const UserLogin = () => {
     },
   });
   const fillDemo = () => {
-    values.email = "demo@shopzone.in";
+    values.email = "demo@gmail.in";
     values.password = "demo@123";
     handleSubmit();
   };

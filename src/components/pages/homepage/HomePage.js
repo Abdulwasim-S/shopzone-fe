@@ -13,6 +13,8 @@ const HomePage = () => {
           minH={"30vh"}
           // bg={"gray.800"}
           bgImage={bg_img}
+          bgSize={"cover"}
+          bgPos={"bottom"}
           color={"white"}
           justifyContent={"center"}
           alignItems={"center"}
